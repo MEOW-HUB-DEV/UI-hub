@@ -160,7 +160,7 @@ titleStroke.Thickness = 1.5
 titleStroke.Transparency = 0.15
 
 local sub = Instance.new("TextLabel")
-sub.Text = "Auto Bounty Blox Fruit"
+sub.Text = "Kaitun Blox Fruit"
 sub.Font = Enum.Font.GothamBold
 sub.TextSize = 14
 sub.TextColor3 = Color3.fromRGB(255,190,225)
