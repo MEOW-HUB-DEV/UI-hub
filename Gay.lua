@@ -1,4 +1,4 @@
---// MEOW HUB SCRIPT - PINK NEON FULL
+--// MEOW HUB SCRIPT - PINK NEON FULL (BLOX FRUITS)
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
@@ -154,7 +154,6 @@ title.Size = UDim2.new(1,-110,0,26)
 title.TextXAlignment = Enum.TextXAlignment.Left
 title.Parent = main
 
--- WHITE STROKE TITLE
 local titleStroke = Instance.new("UIStroke", title)
 titleStroke.Color = Color3.fromRGB(255,255,255)
 titleStroke.Thickness = 1.5
@@ -171,7 +170,6 @@ sub.Size = UDim2.new(1,-110,0,20)
 sub.TextXAlignment = Enum.TextXAlignment.Left
 sub.Parent = main
 
--- WHITE STROKE SUBTITLE
 local subStroke = Instance.new("UIStroke", sub)
 subStroke.Color = Color3.fromRGB(255,255,255)
 subStroke.Thickness = 1.2
@@ -203,11 +201,15 @@ local function label(y)
     return l
 end
 
-local fpsL = label(0)
-local pingL = label(22)
-local playerL = label(44)
-local statusL = label(66)
-statusL.Text = "Status: ON 💖"
+-- ORDER:
+-- 0: Level
+-- 22: Race
+-- 44: Fragments
+-- 66: Beli
+local levelL = label(0)
+local raceL = label(22)
+local fragL = label(44)
+local beliL = label(66)
 
 ------------------------------------------------
 -- DISCORD BUTTON
@@ -242,24 +244,28 @@ discordBtn.MouseButton1Click:Connect(function()
 end)
 
 ------------------------------------------------
--- STATS UPDATE
+-- UPDATE DATA (REALTIME)
 ------------------------------------------------
-local frames, last, fps = 0, tick(), 0
 RunService.RenderStepped:Connect(function()
-    frames += 1
-    if tick() - last >= 1 then
-        fps = frames
-        frames = 0
-        last = tick()
-    end
-
-    fpsL.Text = "FPS: "..fps
-    playerL.Text = "Players: "..#Players:GetPlayers()
-
-    local ok, ping = pcall(function()
-        return Stats.Network.ServerStatsItem["Data Ping"]:GetValueString()
+    -- Level
+    pcall(function()
+        levelL.Text = "Level: "..player.Data.Level.Value
     end)
-    pingL.Text = "Ping: "..(ok and ping or "N/A")
+
+    -- Race
+    pcall(function()
+        raceL.Text = "Race: "..player.Data.Race.Value
+    end)
+
+    -- Fragments
+    pcall(function()
+        fragL.Text = "Fragments: "..player.Data.Fragments.Value
+    end)
+
+    -- Beli
+    pcall(function()
+        beliL.Text = "Beli: "..player.Data.Beli.Value
+    end)
 end)
 
 ------------------------------------------------
